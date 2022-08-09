@@ -11,63 +11,52 @@ spec:
   selector:
     app: cockroachdb
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  name: cockroachdb-statefulset
-spec:
-  clusterIP: None
-  publishNotReadyAddresses: true
-  ports:
-    - name: console
-      port: 8080
-    - name: sql
-      port: 26257
-  selector:
-    app: cockroachdb
----
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: cockroachdb
 spec:
   selector:
     matchLabels:
-      app: cockroachdb
-  serviceName: cockroachdb-statefulset
+        app: cockroachdb
+  strategy:
+    type: Recreate
   replicas: 1
-  minReadySeconds: 10
-  updateStrategy:
-    type: RollingUpdate
-  podManagementPolicy: Parallel
   template:
     metadata:
       labels:
         app: cockroachdb
     spec:
-      terminationGracePeriodSeconds: 10
       containers:
       - name: cockroachdb
-        image: cockroachdb/cockroach:v22.1.5
+        image: cockroachdb/cockroach
         args:
           - start-single-node
           - --insecure
-        #  - --listen-addr=0.0.0.0
-          - --advertise-addr=cockroachdb-0.cockroachdb-statefulset
-        #  - --join=cockroachdb-0.cockroachdb-statefulset
         ports:
         - containerPort: 8080
           name: console
         - containerPort: 26257
           name: sql
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
         volumeMounts:
         - name: data
           mountPath: /cockroach/cockroach-data
-  volumeClaimTemplates:
-  - metadata:
-      name: data
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      resources:
-        requests:
-          storage: 20Gi
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: cockroachdb
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: cockroachdb
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi

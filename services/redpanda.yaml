@@ -61,24 +61,9 @@ spec:
               containerPort: 9092
             - name: prom-and-admin
               containerPort: 9644
-          resources:
-            limits:
-              cpu: "500m"
-              memory: "2Gi"
-            requests:
-              cpu: "500m"
-              memory: "2Gi"
-          #readinessProbe:
-          #  httpGet:
-          #    path: /minio/health/live
-          #    port: 9000
-          #lifecycle:
-          #  preStop:
-          #    exec:
-          #      command:
-          #        - sh
-          #        - -c
-          #        - "sleep 10"
+          readinessProbe:
+            tcpSocket:
+              port: 9092
           volumeMounts:
             - name: data
               mountPath: /var/lib/redpanda/data

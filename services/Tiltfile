@@ -3,22 +3,46 @@ k8s_yaml('redpanda.yaml')
 k8s_resource('redpanda', port_forwards=['8081', '8082', '9092', '9644'])
 
 k8s_yaml('redpanda-console.yaml')
-k8s_resource('redpanda-console', port_forwards=['8083:8080'])
+k8s_resource('redpanda-console', port_forwards=['8080'], resource_deps=['redpanda'])
 
 k8s_yaml('mariadb.yaml')
 k8s_resource('mariadb', port_forwards=['3306'])
 
 k8s_yaml('phpmyadmin.yaml')
-k8s_resource('phpmyadmin', port_forwards=['8180:80'])
+k8s_resource('phpmyadmin', port_forwards=['8086:80'])
 
 k8s_yaml('adminer.yaml')
-k8s_resource('adminer', port_forwards=['8181:8080'])
+k8s_resource('adminer', port_forwards=['8083:8080'])
 
 k8s_yaml('cockroachdb.yaml')
-k8s_resource('cockroachdb', port_forwards=['8080', '26257'])
+k8s_resource('cockroachdb', port_forwards=['8085:8080', '26257'])
 
 k8s_yaml('scylladb.yaml')
 k8s_resource('scylladb', port_forwards=['9042', '8000'])
 
+k8s_yaml('cassandra-web.yaml')
+k8s_resource('cassandra-web', port_forwards=['8084:80'], links=['http://localhost:8084/#/main'], resource_deps=['scylladb'])
+
 k8s_yaml('minio.yaml')
 k8s_resource('minio', port_forwards=['9000', '9001'])
+
+k8s_yaml('rabbitmq.yaml')
+k8s_resource('rabbitmq', port_forwards=['5672', '15672'])
+
+k8s_yaml('postgres.yaml')
+k8s_resource('postgres', port_forwards=['5432'])
+
+k8s_yaml('redis.yaml')
+k8s_resource('redis', port_forwards=['6379'])
+
+k8s_yaml('redis-insight.yaml')
+k8s_resource('redis-insight', port_forwards=['8001'], resource_deps=['redis'])
+
+k8s_yaml('opensearch.yaml')
+k8s_resource('opensearch', port_forwards=['9200', '9300'], links=['https://localhost:9200/'])
+
+k8s_yaml('opensearch-dashboards.yaml')
+k8s_resource('opensearch-dashboards', port_forwards=['5601'])#, resource_deps=['opensearch'])
+
+k8s_yaml('neo4j.yaml')
+k8s_resource('neo4j', port_forwards=['7474', '7687'])

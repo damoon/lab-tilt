@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cassandra-web
+spec:
+  ports:
+    - name: ui
+      port: 80
+  selector:
+    app: cassandra-web
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cassandra-web
+spec:
+  selector:
+    matchLabels:
+        app: cassandra-web
+  strategy:
+    type: Recreate
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: cassandra-web
+    spec:
+      containers:
+        - name: cassandra-web
+          image: ipushc/cassandra-web
+          env:
+            - name: HOST_PORT
+              value: ":80"
+            - name: READ_ONLY
+              value: 'false'
+            - name: CASSANDRA_HOST
+              value: scylladb
+            - name: CASSANDRA_PORT
+              value: '9042'
+            - name: CASSANDRA_USERNAME
+              value: ''
+            - name: CASSANDRA_PASSWORD
+              value: ''
+          ports:
+            - name: ui
+              containerPort: 80
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80

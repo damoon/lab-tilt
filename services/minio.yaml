@@ -45,24 +45,10 @@ spec:
               containerPort: 9000
             - name: console
               containerPort: 9001
-          resources:
-            limits:
-              cpu: "500m"
-              memory: "2Gi"
-            requests:
-              cpu: "500m"
-              memory: "2Gi"
-          #readinessProbe:
-          #  httpGet:
-          #    path: /minio/health/live
-          #    port: 9000
-          #lifecycle:
-          #  preStop:
-          #    exec:
-          #      command:
-          #        - sh
-          #        - -c
-          #        - "sleep 10"
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 9001
           volumeMounts:
             - name: data
               mountPath: /data

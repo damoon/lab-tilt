@@ -1,0 +1,29 @@
+{
+    "extends": [
+        "config:base"
+    ],
+    "pinDigests": true,
+    "prHourlyLimit": 0,
+    "labels": [
+        "renovate-bot"
+    ],
+    "automerge": true,
+    "automergeType": "pr",
+    "kubernetes": {
+        "fileMatch": [
+            "\\.yaml$"
+        ]
+    },
+    "regexManagers": [
+        {
+            "fileMatch": [
+                "^.github/workflows/verify.yml$"
+            ],
+            "matchStrings": [
+                "tilt: '(?<currentValue>.*?)'\n"
+            ],
+            "depNameTemplate": "tilt-dev/tilt",
+            "datasourceTemplate": "github-tags"
+        }
+    ]
+}

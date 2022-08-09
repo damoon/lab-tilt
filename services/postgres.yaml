@@ -1,63 +1,61 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: mariadb
+  name: postgres
 spec:
   ports:
     - name: sql
-      port: 3306
+      port: 5432
   selector:
-    app: mariadb
+    app: postgres
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mariadb
+  name: postgres
 spec:
   selector:
     matchLabels:
-        app: mariadb
+        app: postgres
   strategy:
     type: Recreate
   replicas: 1
   template:
     metadata:
       labels:
-        app: mariadb
+        app: postgres
     spec:
       containers:
-        - name: mariadb
-          image: mariadb:latest
+        - name: postgres
+          image: postgres
           env:
-            - name: MARIADB_USER
+            - name: POSTGRES_USER
               value: username
-            - name: MARIADB_PASSWORD
+            - name: POSTGRES_PASSWORD
               value: password
-            - name: MARIADB_DATABASE
+            - name: POSTGRES_DB
               value: database
-            - name: MARIADB_ROOT_PASSWORD
-              value: toor
           ports:
             - name: sql
-              containerPort: 3306
+              containerPort: 5432
           readinessProbe:
             exec:
               command:
               - bash
               - -c
-              - echo "SELECT 1" | mariadb -u username --password=password
+              - psql -U username database -c "SELECT 1"
           volumeMounts:
             - name: data
-              mountPath: /var/lib/mysql
+              mountPath: /var/lib/postgresql/data
       volumes:
         - name: data
           persistentVolumeClaim:
-            claimName: mariadb
+            claimName: postgres
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mariadb
+  name: postgres
 spec:
   accessModes:
     - ReadWriteOnce

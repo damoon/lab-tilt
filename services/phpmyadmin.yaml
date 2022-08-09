@@ -30,29 +30,15 @@ spec:
           image: phpmyadmin/phpmyadmin:latest
           env:
             - name: PMA_USER
-              value: user
+              value: username
             - name: PMA_PASSWORD
-              value: secret
+              value: password
             - name: PMA_HOSTS
               value: mariadb
           ports:
             - name: pma
               containerPort: 80
-          resources:
-            limits:
-              cpu: "500m"
-              memory: "2Gi"
-            requests:
-              cpu: "500m"
-              memory: "2Gi"
-          #readinessProbe:
-          #  httpGet:
-          #    path: /minio/health/live
-          #    port: 9000
-          #lifecycle:
-          #  preStop:
-          #    exec:
-          #      command:
-          #        - sh
-          #        - -c
-          #        - "sleep 10"
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
