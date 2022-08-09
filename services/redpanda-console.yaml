@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: redpanda-console
+spec:
+  ports:
+    - name: console
+      port: 8080
+  selector:
+    app: redpanda-console
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redpanda-console
+spec:
+  selector:
+    matchLabels:
+        app: redpanda-console
+  strategy:
+    type: Recreate
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: redpanda-console
+    spec:
+      containers:
+        - name: redpanda-console
+          image: docker.redpanda.com/vectorized/console:master-fcc15a3
+          env:
+            - name: KAFKA_BROKERS
+              value: redpanda:9092
+          ports:
+            - name: console
+              containerPort: 8080
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "2Gi"
+            requests:
+              cpu: "500m"
+              memory: "2Gi"
+          #readinessProbe:
+          #  httpGet:
+          #    path: /minio/health/live
+          #    port: 9000
+          #lifecycle:
+          #  preStop:
+          #    exec:
+          #      command:
+          #        - sh
+          #        - -c
+          #        - "sleep 10"

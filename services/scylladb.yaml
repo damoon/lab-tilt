@@ -1,0 +1,73 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: scylladb
+spec:
+  ports:
+    - name: cql
+      port: 9042
+    - name: alternator
+      port: 8000
+  selector:
+    app: scylladb
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scylladb
+spec:
+  selector:
+    matchLabels:
+        app: scylladb
+  strategy:
+    type: Recreate
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: scylladb
+    spec:
+      containers:
+        - name: scylladb
+          image: scylladb/scylla
+          ports:
+            - name: sql
+              containerPort: 9042
+            - name: alternator
+              containerPort: 8000
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "2Gi"
+            requests:
+              cpu: "500m"
+              memory: "2Gi"
+          #readinessProbe:
+          #  httpGet:
+          #    path: /minio/health/live
+          #    port: 9000
+          #lifecycle:
+          #  preStop:
+          #    exec:
+          #      command:
+          #        - sh
+          #        - -c
+          #        - "sleep 10"
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/scylla
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: scylladb
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: scylladb
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
