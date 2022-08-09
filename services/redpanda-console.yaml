@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
         - name: redpanda-console
-          image: docker.redpanda.com/vectorized/console:master-fcc15a3
+          image: docker.redpanda.com/vectorized/console:master-fcc15a3@sha256:7c583ad4996f4d2237fd37168f26d43148e25b76ad7503245c9359b6baf7f149
           env:
             - name: KAFKA_BROKERS
               value: redpanda:9092

@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
         - name: cassandra-web
-          image: ipushc/cassandra-web
+          image: ipushc/cassandra-web@sha256:e2fc618c9b6c40dcf870dfb9d09229d3202b2e494ec68e48919cfac38b23adc9
           env:
             - name: HOST_PORT
               value: ":80"
