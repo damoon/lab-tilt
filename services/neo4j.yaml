@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
         - name: neo4j
-          image: neo4j@sha256:9654996cdc20865fe2f84b75730e66ad7ae6310290ad64dcdf9fe1a47a0e8ea8
+          image: neo4j@sha256:9c0cc6881a4dd43ba164a8c77eaf5de00705e82c627d5326edf91bb46bd130cd
           env:
             - name: NEO4J_AUTH
               value: none
