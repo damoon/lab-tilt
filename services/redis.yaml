@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
         - name: redis
-          image: redis@sha256:9bc34afe08ca30ef179404318cdebe6430ceda35a4ebe4b67d10789b17bdf7c4
+          image: redis@sha256:495732ba570db6a3626370a1fb949e98273a13d41eb3e26f7ecb1f6e31ad4041
           args:
           - redis-server
           - --save
