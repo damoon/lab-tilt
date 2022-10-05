@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
         - name: mariadb
-          image: mariadb:latest@sha256:6166b70c05a62173e9a80d26271e85077614709baa5c59f9ab3369e00c4e363d
+          image: mariadb:latest@sha256:59ef1139afa1ec26f98e316a8dbef657daf9f64f84e9378b190d1d7557ad2feb
           env:
             - name: MARIADB_USER
               value: username
