@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
         - name: phpmyadmin
-          image: phpmyadmin/phpmyadmin:latest@sha256:ae6dadd9cf3c158e42937788f7255fa820ea3daef0349226d8d43f32e76535e1
+          image: phpmyadmin/phpmyadmin:latest@sha256:0d951ee3bec76c5d7083122f5db509ebfa6c209efc5e70f1d47af2e13a34f543
           env:
             - name: PMA_USER
               value: username
