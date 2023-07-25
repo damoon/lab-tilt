@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
         - name: scylladb
-          image: scylladb/scylla@sha256:e3fc05417c9389e510ccdb216950f8308d27f05ecf4babd81dd1076ede2bdb2a
+          image: scylladb/scylla@sha256:a575ca7be0d479ad73b58126d24038039abd5daf9d14e017c5c7c448b0516baa
           ports:
             - name: sql
               containerPort: 9042
