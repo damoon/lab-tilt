@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
         - name: rabbitmq
-          image: rabbitmq:3-management@sha256:18b9a1ff9ccd4db2675d4d2eebd375fa8cc84204d09e9fa09889f2c88f1f161a
+          image: rabbitmq:3-management@sha256:afc76f4bcd9d3b4ecdd63e0a33d96547950cd4a5a35e3845a72c398e4d2ffaab
           env:
             - name: RABBITMQ_MNESIA_DIR
               value: /var/lib/rabbitmq
