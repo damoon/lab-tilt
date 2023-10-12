@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
         - name: adminer
-          image: adminer:latest@sha256:81844f7d3628e9750445abdb43ff6e8f94bf892fb32b1f8a965262f6eee3643f
+          image: adminer:latest@sha256:f762276d79d2f18ae7fe28c79ee25a0a3b3dba9dc92ed695a3e88d613b3e6bde
           ports:
             - name: adminer
               containerPort: 8080
