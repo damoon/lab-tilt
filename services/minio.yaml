@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
         - name: minio
-          image: quay.io/minio/minio@sha256:4232b4bcd98ca205267a016f84064171eec2a4b2e7e98012467463a2129bca21
+          image: quay.io/minio/minio@sha256:bb166a79486f65e9bff441748726499129cf78e339938ac521c3ffe6f5c365d4
           args:
             - server
             - /data
