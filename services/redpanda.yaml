@@ -33,7 +33,7 @@ spec:
     spec:
       containers:
         - name: redpanda
-          image: docker.redpanda.com/vectorized/redpanda:latest@sha256:dca9d37efbbae3c2dcdc07d6a45fa1e0a7a541bc9cdc03db3937b80a4a9eae3d
+          image: docker.redpanda.com/vectorized/redpanda:latest@sha256:62a82229782aef4082cfe2f3a89e894003d27af6fb70b344fd29e8c419238e4e
           args:
             - redpanda
             - start
