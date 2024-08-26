@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
       - name: cockroachdb
-        image: cockroachdb/cockroach@sha256:d0378e606ce0536be7bf2d946f026562e025837169d20eb2880e5c1b813ac975
+        image: cockroachdb/cockroach@sha256:bd2f91bee95509e460fa421fde73d7916c901cedb26290f8ef33abd8b6fe67df
         args:
           - start-single-node
           - --insecure
