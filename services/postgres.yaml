@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
         - name: postgres
-          image: postgres@sha256:7fe89c9e6879372f435dddacc4eb27785f48cdab345cb3052208705222f92376
+          image: postgres@sha256:8d3be35b184e70d81e54cbcbd3df3c0b47f37d06482c0dd1c140db5dbcc6a808
           env:
             - name: POSTGRES_USER
               value: username
