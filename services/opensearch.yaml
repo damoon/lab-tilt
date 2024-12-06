@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
         - name: opensearch
-          image: opensearchproject/opensearch:2.11.1@sha256:cbca8e35fb333af938289ac0f370abdcbde46dbe7629acc1af0cd4219da85b62
+          image: opensearchproject/opensearch:2.18.0@sha256:8a354092666b1a47f0172c9c11ed5d6591f7b51843f2f1cebfdcf91032c34bb7
           env:
             - name: discovery.type
               value: single-node
