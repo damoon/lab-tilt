@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
         - name: redis-insight
-          image: redislabs/redisinsight@sha256:be5104689507e252653c927711643b4d88597ddea5ef1459458df3c0382e6906
+          image: redislabs/redisinsight@sha256:1024faa42c3c11d0048ca8e931141c786d8f1c6b50fffcdd45b7e69e61843d1c
           ports:
             - name: ui
               containerPort: 8001
