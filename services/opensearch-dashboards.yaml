@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
         - name: opensearch-dashboards
-          image: opensearchproject/opensearch-dashboards:2.11.1@sha256:223eaaca192bcfe3101ddf49682d1dfb1a4cefbafdae18b54b7562170d29e8d1
+          image: opensearchproject/opensearch-dashboards:2.19.7@sha256:d3ad52a0e8721c815b11a96121ecce6432d2c7345c198dea8e07709cfc4e01fc
           env:
             - name: OPENSEARCH_HOSTS
               value: '["https://opensearch:9200"]'
